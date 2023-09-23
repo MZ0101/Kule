@@ -1,0 +1,25 @@
+<UI version="4.0" >
+ <class>Kula_01Class</class>
+ <widget class="QWidget" name="Kula_01Class" >
+  <property name="objectName" >
+   <string notr="true">Kula_01Class</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Kula_01</string>
+  </property>$centralwidget$
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources>
+   <include location="Kula_01.qrc"/>
+ </resources>
+ <connections/>
+</UI>
