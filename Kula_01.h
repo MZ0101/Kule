@@ -31,11 +31,11 @@ public:
 
     Kula ball_1;
     QPushButton* button = nullptr;
-
+    QString for_label;
     QTimer timer;
     QTimer timer_1;
-    int balls_number { 200 };
-
+    int balls_number { 100 };
+    QLabel *number_balls;
     QList <Kula *> balls_array;
 
     //void balls_cllision();

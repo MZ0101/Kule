@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsSceneMouseEvent>
 
 class Kula : public QObject, public QGraphicsEllipseItem
 {
@@ -15,12 +16,17 @@ public:
 
 	QPointF center;
 	QTimer timer;
-	float r{ 0 };
-	int x_velocity{ 0 };
-	int y_velocity{ 0 };
+	qreal r{ 0 };
+	qreal m{ 1 };
+	
+	qreal x_velocity{ 0.0 };
+	qreal y_velocity{ -5.0};
+	qreal g = { 0.0 };
 
 	void get_center();
-	void collision();
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
+
 private slots:
 	
 	
