@@ -54,10 +54,10 @@ Kula_01::Kula_01(QWidget* parent) : QWidget(parent)
     this->main_horisontal.addWidget(&this->main_view);
     this->setLayout(&this->main_horisontal);
 
-    this->timer.start(35);
+    this->timer_move.start(35);
     this->timer_spawn.setInterval(150);
 
-    QObject::connect(&this->timer, &QTimer::timeout, this, &Kula_01::balls_moving);
+    QObject::connect(&this->timer_move, &QTimer::timeout, this, &Kula_01::balls_moving);
     QObject::connect(&this->buttons[0],&QPushButton::clicked,this,&Kula_01::balls_spawn);
 
     QObject::connect(&this->buttons[0], &QPushButton::pressed, this, [this]() {
