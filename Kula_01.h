@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QTimer>
 #include <QList>
+#include <thread>
 
 
 #include "Kula.h"
@@ -29,20 +30,29 @@ public:
     QVBoxLayout* ball_data_vertical = nullptr;
     QHBoxLayout main_horisontal;
 
-    Kula ball_1;
-    QPushButton* button = nullptr;
-    QString for_label;
+    
+   QPushButton *buttons = nullptr;
+   /*/ QPushButton* on_gravity = nullptr;
+    QPushButton *turn_gravity = nullptr;*/
+    QString for_number_balls;
     QTimer timer;
-    QTimer timer_1;
+    QTimer timer_spawn;
     int balls_number { 100 };
     QLabel *number_balls;
+    QLabel* gravity_option;
     QList <Kula *> balls_array;
 
     //void balls_cllision();
 
+    void balls_start_spawn();
+  
 public slots:
     void balls_moving();
-    
     void balls_spawn();
+  /*  void on_gravi();
+    
+    void turn_gravi();*/
+
+    void execute_for_buttons();
 
 };
