@@ -6,8 +6,8 @@ Kula::Kula()
 	//this->setPos(this->pos().x() + i, this->pos().y());
 	this->r = this->rect().width()/2;
 	this->m = std::rand() % 5 + 1;
-	this->x_velocity = ((std::rand() % 5 -2) + 1);
-	this->y_velocity = (std::rand() % 5  -3);
+	this->x_velocity = std::rand() % 11 - 5;
+	this->y_velocity = std::rand() % 11 - 5;
 	this->setBrush(QBrush(Qt::blue));
 	this->setPen(QPen(Qt::NoPen));
 	this->setFlag(QGraphicsEllipseItem::ItemIsSelectable, true);

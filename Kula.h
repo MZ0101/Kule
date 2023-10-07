@@ -19,7 +19,7 @@ public:
 	
 	qreal x_velocity{ 0.0 };
 	qreal y_velocity{ 0.0};
-	qreal g = { 0.981 };
+	//qreal g = { 0.981 };
 
 	void get_center();
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;

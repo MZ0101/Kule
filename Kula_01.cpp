@@ -8,17 +8,18 @@ Kula_01::Kula_01(QWidget* parent) : QWidget(parent)
 
     this->ball_data_vertical = new QVBoxLayout();
     this->ball_data_vertical->setAlignment(Qt::AlignTop);
-    this->buttons = new QPushButton[6];
+    this->buttons = new QPushButton[7];
 
-    QString buttnos_text[] = { "Add ball", "Gravity on", "Gravity off", "Turn gravity" ,"Randomize x velocity", "Randomize y velocity"};
+    QString buttnos_text[] = { "Add ball", "Gravity on", "Gravity off", "Turn gravity" ,
+        "Randomize x velocity", "Randomize y velocity", "Delete all balls"};
 
-    for (size_t i{ 0 }; i < 6; i++)
+    for (size_t i{ 0 }; i < 7; i++)
     {
         this->buttons[i].setText(buttnos_text[i]);
         this->ball_data_vertical->addWidget(&this->buttons[i]);
     }
 
-    for (size_t i{ 1 }; i < 6; i++)
+    for (size_t i{ 1 }; i < 7; i++)
     {
         QObject::connect(&this->buttons[i], &QPushButton::clicked, this, &Kula_01::execute_for_buttons); 
     }
@@ -94,7 +95,8 @@ void Kula_01::balls_moving()
 {
     for (Kula* kula_1 : this->balls_array)
     {
-        kula_1->y_velocity += kula_1->g;
+       // kula_1->y_velocity += kula_1->g;
+        kula_1->y_velocity += this->g;
         kula_1->setPos(kula_1->x() + kula_1->x_velocity, kula_1->y() + kula_1->y_velocity);
 
         for (Kula* kula_2 : this->balls_array)
@@ -200,16 +202,8 @@ void Kula_01::balls_spawn()
 
     if (this->balls_number > 0)
     {
-        double gravity_end_ball{0.981};
-
-        if (!this->balls_array.empty())
-        {
-            gravity_end_ball = this->balls_array.back()->g;
-           
-        }
-
         this->balls_array.push_back(new Kula());
-        this->balls_array.back()->g = gravity_end_ball;
+        //this->balls_array.back()->g = gravity_end_ball;
         this->main_scene.addItem(this->balls_array.back());
         
        
@@ -223,7 +217,7 @@ void Kula_01::balls_spawn()
         this->balls_array.back()->setPos(ball_position);
         this->balls_number--;
 
-        this->number_balls->setText(this->for_number_balls + QString::number(100 - this->balls_number));
+        this->number_balls->setText(this->for_number_balls + QString::number(this->balls_max - this->balls_number));
     }
 }
 
@@ -233,44 +227,55 @@ void Kula_01::execute_for_buttons()
 
     if (button_clicked == &this->buttons[1])
     {
-        for (Kula* kula_1 : this->balls_array)
-        {
-            kula_1->g = 0.0981;
+            this->g = 0.0981;
             this->gravity_option->setText("Gravity: on");
-        }
+       
     }
     else if (button_clicked == &this->buttons[2])
     {
-        for (Kula* kula_1 : this->balls_array)
-        {
-            kula_1->g = 0;
+
+            this->g = 0.0;
             this->gravity_option->setText("Gravity: off");
-        }
+        
     }
     else if(button_clicked == &this->buttons[3])
     {
-        for (Kula* kula_1 : this->balls_array)
-        {
-            kula_1->g = -0.0981;
+
+            this->g = -0.0981;
             this->gravity_option->setText("Gravity: turn");
-        }
+   
     }
     else if(button_clicked == &this->buttons[4])
     {
         for (Kula* kula_1 : this->balls_array)
         {
             kula_1->x_velocity = std::rand() % 21 - 10;
-            //this->gravity_option->setText("Gravity: off");
+         
         }
     }
-    else
+    else if (button_clicked == &this->buttons[5])
     {
         for (Kula* kula_1 : this->balls_array)
         {
             kula_1->y_velocity = std::rand() % 21 - 10;
-            //this->gravity_option->setText("Gravity: off");
+           
         }
+    }
+    else
+    {
+        for (size_t i = 0; i < this->balls_array.size(); i++)
+        {
+            Kula* kula_1 = this->balls_array.at(i);
+            this->main_scene.removeItem(kula_1);
+            delete kula_1;
         }
+        this->balls_array.clear();
+
+        this->balls_number = 200;
+        this->balls_max = 200;
+        this->for_number_balls = "Balls (max " + QString::number(this->balls_number) + " ): ";
+        this->number_balls->setText(this->for_number_balls + QString::number(this->balls_max - this->balls_number));
+    }
 }
 
 Kula_01::~Kula_01()
