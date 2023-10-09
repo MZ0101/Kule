@@ -8,6 +8,7 @@ Program został zrobiony dla testów, planowane jest przejście na silnik fizycz
 
 ### **Możliwe rozszerzenia obecnego progtamu:** 
 - wprowadzenie większej liczby kształtów brył
+- przeskalowanie pikseli na metry
 - przejście na 3D
 - rozbudowanie interfejsu
   
